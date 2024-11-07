@@ -37,7 +37,7 @@ private lateinit var binding: FragmentOnBoardPagerBinding
         sharedPreferences.unit(requireContext())
         buttonStart.setOnClickListener{
             sharedPreferences.onBoardShown = true
-            findNavController().navigate(R.id.noteFragment)
+            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
             Toast.makeText(requireContext(), "Добро пожаловать", Toast.LENGTH_SHORT).show()
         }
     }

@@ -29,6 +29,7 @@ private lateinit var binding: FragmentOnBoardBinding
 
     private fun init() {
         binding.vp2.adapter = OnBoardAdapter(this)
+
         //Инициализация Tab layout
         binding.dots.attachTo(binding.vp2)
         }
