@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/onBoardFragment">
-
     <fragment
         android:id="@+id/onBoardFragment"
         android:name="com.example.noteapp.ui.fragments.onboard.OnBoardFragment"
@@ -15,4 +14,9 @@
         android:name="com.example.noteapp.ui.fragments.onboard.OnBoardPagerFragment"
         android:label="fragment_on_board_pager"
         tools:layout="@layout/fragment_on_board_pager" />
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.example.noteapp.ui.fragments.note.NoteFragment"
+        android:label="fragment_note"
+        tools:layout="@layout/fragment_note" />
 </navigation>
