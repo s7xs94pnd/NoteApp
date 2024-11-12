@@ -15,14 +15,14 @@ import com.example.noteapp.utils.PreferenceHelper
 
 class OnBoardPagerFragment : Fragment() {
 
-private lateinit var binding: FragmentOnBoardPagerBinding
+    private lateinit var binding: FragmentOnBoardPagerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentOnBoardPagerBinding.inflate(layoutInflater,container,false)
+        binding = FragmentOnBoardPagerBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -32,10 +32,10 @@ private lateinit var binding: FragmentOnBoardPagerBinding
         setupListeners()
     }
 
-    private fun setupListeners()= with(binding) {
+    private fun setupListeners() = with(binding) {
         val sharedPreferences = PreferenceHelper()
         sharedPreferences.unit(requireContext())
-        buttonStart.setOnClickListener{
+        buttonStart.setOnClickListener {
             sharedPreferences.onBoardShown = true
             findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
             Toast.makeText(requireContext(), "Добро пожаловать", Toast.LENGTH_SHORT).show()
@@ -46,27 +46,41 @@ private lateinit var binding: FragmentOnBoardPagerBinding
         when (requireArguments().getInt(ARG_ONBOARD_POSITION)) {
             0 -> {
                 title.text = "Удобства"
-                desc.text = "Создавайте заметки в два клика!\n Записывайте мысли, идеи и \n важные задачи мгновенно."
-                val composition = LottieCompositionFactory.fromRawResSync(requireContext(), R.raw.anim_onboard_1).value!!
+                desc.text =
+                    "Создавайте заметки в два клика!\n Записывайте мысли, идеи и \n важные задачи мгновенно."
+                val composition = LottieCompositionFactory.fromRawResSync(
+                    requireContext(),
+                    R.raw.anim_onboard_1
+                ).value!!
                 lottie.setComposition(composition)
             }
-            1->{
+
+            1 -> {
                 title.text = "Организация"
-                desc.text = "Организуйте заметки по папкам \nи тегам. Легко находите нужную \nинформацию в любое время."
-                val composition = LottieCompositionFactory.fromRawResSync(requireContext(), R.raw.anim_onboard_2).value!!
+                desc.text =
+                    "Организуйте заметки по папкам \nи тегам. Легко находите нужную \nинформацию в любое время."
+                val composition = LottieCompositionFactory.fromRawResSync(
+                    requireContext(),
+                    R.raw.anim_onboard_2
+                ).value!!
                 lottie.setComposition(composition)
             }
-            2->{
+
+            2 -> {
                 title.text = "Синхронизация"
-                desc.text = "Синхронизация на всех устройствах\n Доступ к записям в любое время \nи в любом месте."
-                val composition = LottieCompositionFactory.fromRawResSync(requireContext(), R.raw.anim_onboard_3).value!!
+                desc.text =
+                    "Синхронизация на всех устройствах\n Доступ к записям в любое время \nи в любом месте."
+                val composition = LottieCompositionFactory.fromRawResSync(
+                    requireContext(),
+                    R.raw.anim_onboard_3
+                ).value!!
                 lottie.setComposition(composition)
                 binding.buttonStart.visibility = View.VISIBLE
             }
         }
     }
 
-    companion object{
+    companion object {
         const val ARG_ONBOARD_POSITION = "onBoard"
     }
 }
