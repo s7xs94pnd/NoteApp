@@ -14,4 +14,8 @@ class PreferenceHelper {
     var onBoardShown: Boolean
         get() = pref.getBoolean("onBoard", false)
         set(value) = pref.edit().putBoolean("onBoard", value).apply()
+
+    var isGridLayout: Boolean
+        get() = pref.getBoolean("GridLayout", false)
+        set(value) = pref.edit().putBoolean("GridLayout", value).apply()
 }

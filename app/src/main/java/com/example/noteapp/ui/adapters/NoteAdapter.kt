@@ -1,5 +1,6 @@
 package com.example.noteapp.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,14 +8,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapp.data.models.NoteModel
 import com.example.noteapp.databinding.ItemNoteBinding
+import com.example.noteapp.ui.interfaces.OnClickItem
 
-class NoteAdapter : ListAdapter<NoteModel, NoteAdapter.NoteViewHolder>(DiffCallback()) {
+class NoteAdapter(private val LongClickItem: OnClickItem, private val ClickItem: OnClickItem) :
+    ListAdapter<NoteModel, NoteAdapter.NoteViewHolder>(DiffCallback()) {
+
     inner class NoteViewHolder(private val binding: ItemNoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: NoteModel) = with(binding) {
-            tvTitle.text = item.title
+            tvTitle.text = item.title + ":"
             tvDesc.text = item.desc
             tvTime.text = item.time
+            root.setBackgroundColor(item.color)
         }
     }
 
@@ -30,6 +35,14 @@ class NoteAdapter : ListAdapter<NoteModel, NoteAdapter.NoteViewHolder>(DiffCallb
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.onBind(getItem(position))
+        holder.itemView.setOnLongClickListener {
+            LongClickItem.onLongClick(getItem(position))
+            true
+        }
+        holder.itemView.setOnClickListener {
+            ClickItem.onClick(getItem(position))
+            true
+        }
     }
 
     class DiffCallback : DiffUtil.ItemCallback<NoteModel>() {

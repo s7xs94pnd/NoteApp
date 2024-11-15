@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "noteTable")
-data class NoteModel(val title: String, val desc: String, val time: String) {
+data class NoteModel(val title: String, val desc: String, val time: String, val color: Int) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }

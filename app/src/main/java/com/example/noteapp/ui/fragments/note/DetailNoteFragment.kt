@@ -1,14 +1,19 @@
 package com.example.noteapp.ui.fragments.note
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.noteapp.App
+import com.example.noteapp.R
 import com.example.noteapp.data.models.NoteModel
 import com.example.noteapp.databinding.FragmentDetailNoteBinding
 import java.text.SimpleDateFormat
@@ -19,6 +24,8 @@ import java.util.TimerTask
 class DetailNoteFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailNoteBinding
+    private var noteId: Int = -1
+    private var color = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +39,21 @@ class DetailNoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpListeners()
         startUpdatingTime()
+        updateNote()
+    }
+
+    private fun updateNote() {
+        arguments?.let { args ->
+            noteId = args.getInt("noteId", -1)
+        }
+        if (noteId != -1) {
+            val modelGotWithId = App.appDataBase?.noteDao()?.getById(noteId)
+            modelGotWithId?.let { model ->
+                binding.edTitle.setText(model.title)
+                binding.edDesc.setText(model.desc)
+                binding.root.setBackgroundColor(model.color) // Используем сохранённое значение цвета
+            }
+        }
     }
 
     private fun setUpListeners() = with(binding) {
@@ -45,9 +67,9 @@ class DetailNoteFragment : Fragment() {
 
             private fun edsState() {
                 if (edDesc.text.isNotEmpty() && edTitle.text.isNotEmpty()) {
-                    tvAddText.visibility = View.VISIBLE
+                    tvReady.visibility = View.VISIBLE
                 } else {
-                    tvAddText.visibility = View.GONE
+                    tvReady.visibility = View.GONE
                 }
             }
 
@@ -58,16 +80,56 @@ class DetailNoteFragment : Fragment() {
 
         edDesc.addTextChangedListener(textWatcher)
         edTitle.addTextChangedListener(textWatcher)
-        tvAddText.setOnClickListener {
+
+        tvReady.setOnClickListener {
             val title = edTitle.text.toString()
             val desc = edDesc.text.toString()
             val time = getCurrentDateTime()
-            App.appDataBase?.noteDao()?.insertNote(NoteModel(title + ":", desc, time))
+            if (noteId != -1) {
+                val updateNote = NoteModel(title, desc, time, color)
+                updateNote.id = noteId
+                App.appDataBase?.noteDao()?.updateNote(updateNote)
+            } else {
+                App.appDataBase?.noteDao()?.insertNote(NoteModel(title, desc, time, color))
+            }
             findNavController().navigateUp()
         }
         btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+        igColors.setOnClickListener {
+            showColors()
+        }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun showColors() {
+        val builder = AlertDialog.Builder(requireContext())
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_dialog_layout, null)
+
+        val buttons = mapOf(
+            R.id.orange to R.color.orange,
+            R.id.red to R.color.red,
+            R.id.green to R.color.green,
+            R.id.blue to R.color.blue,
+            R.id.purple to R.color.purple,
+            R.id.pink to R.color.pink
+        )
+
+        buttons.forEach { (buttonId, colorId) ->
+            view.findViewById<Button>(buttonId).setOnClickListener {
+                color = resources.getColor(colorId, null)
+                binding.root.setBackgroundColor(color)
+            }
+        }
+
+        builder.setView(view)
+        val alertDialog = builder.create()
+
+        alertDialog.window?.apply {
+            attributes.gravity = Gravity.TOP or Gravity.END
+        }
+        alertDialog.show()
     }
 
     private fun getCurrentDateTime(): String {

@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs.kotlin")
+
 }
 
 android {
@@ -47,7 +49,6 @@ dependencies {
     // room
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
-
     implementation(libs.dotsindicator)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
