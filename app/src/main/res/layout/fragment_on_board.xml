@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#252525"
+    tools:context=".ui.fragments.onboard.OnBoardFragment">
+
+<androidx.viewpager2.widget.ViewPager2
+    android:id="@+id/vp2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="end"
+        android:text="Пропустить"
+        android:textColor="#D88B02"
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+        android:layout_marginBottom="178dp"
+        android:layout_gravity="center|bottom"
+        android:id="@+id/dots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:dotsColor="#D88B02"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="16dp"
+        app:dotsSpacing="4dp"
+        app:dotsWidthFactor="2.5"
+        app:dotsStrokeColor="#C4C4C4"
+        app:progressMode="true"
+        />
+</FrameLayout>
