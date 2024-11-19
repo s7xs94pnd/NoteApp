@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
     id("androidx.navigation.safeargs.kotlin")
-
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -42,14 +42,22 @@ android {
 }
 
 dependencies {
+    //lottie
     implementation(libs.lottie)
     //Navigation
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     // room
     implementation(libs.androidx.room.ktx)
+    implementation(libs.firebase.auth)
     ksp(libs.androidx.room.compiler)
+    //dots for a OnBoard
     implementation(libs.dotsindicator)
+    //Fire Base
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.play.services.auth)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

@@ -18,4 +18,8 @@ class PreferenceHelper {
     var isGridLayout: Boolean
         get() = pref.getBoolean("GridLayout", false)
         set(value) = pref.edit().putBoolean("GridLayout", value).apply()
+
+    var signedIn: Boolean
+        get() = pref.getBoolean("SignIn", false)
+        set(value) = pref.edit().putBoolean("SignIn", value).apply()
 }

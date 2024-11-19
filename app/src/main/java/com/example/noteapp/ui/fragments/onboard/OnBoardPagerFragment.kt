@@ -37,7 +37,7 @@ class OnBoardPagerFragment : Fragment() {
         sharedPreferences.unit(requireContext())
         buttonStart.setOnClickListener {
             sharedPreferences.onBoardShown = true
-            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
+            findNavController().navigate(R.id.signInFragment)
             Toast.makeText(requireContext(), "Добро пожаловать", Toast.LENGTH_SHORT).show()
         }
     }

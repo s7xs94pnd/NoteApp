@@ -53,6 +53,7 @@
         android:layout_gravity="center|bottom"
         android:backgroundTint="#FF9800"
         android:textSize="22sp"
+        android:textColor="@color/white"
         android:text="Начать"
         android:textStyle="bold"
         android:layout_width="230dp"

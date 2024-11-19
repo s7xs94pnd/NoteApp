@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupNavigation()
         checkOnboardingStatus()
+        checkSignIn()
     }
 
     private fun setupNavigation() {
@@ -28,7 +29,15 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = PreferenceHelper()
         sharedPreferences.unit(this)
         if (sharedPreferences.onBoardShown) {
-            navController.navigate(R.id.action_onBoardFragment_to_noteFragment)
+            navController.navigate(R.id.signInFragment)
         }
     }
+    private fun checkSignIn() {
+        val sharedPreferences = PreferenceHelper()
+        sharedPreferences.unit(this)
+        if (sharedPreferences.signedIn) {
+            navController.navigate(R.id.noteFragment)
+        }
+    }
+
 }
