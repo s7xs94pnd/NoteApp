@@ -2,10 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/onBoardFragment">
+    android:id="@+id/nav_graph">
 
-
+    <!-- OnBoardFragment -->
     <fragment
         android:id="@+id/onBoardFragment"
         android:name="com.example.noteapp.ui.fragments.onboard.OnBoardFragment"
@@ -13,11 +12,10 @@
         tools:layout="@layout/fragment_on_board">
         <action
             android:id="@+id/action_onBoardFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:popUpTo="@id/onBoardFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/signInFragment" />
     </fragment>
 
+    <!-- SignInFragment -->
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.noteapp.ui.fragments.signin.SignInFragment"
@@ -25,11 +23,10 @@
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_noteFragment"
-            app:destination="@id/noteFragment"
-            app:popUpTo="@id/signInFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/noteFragment" />
     </fragment>
 
+    <!-- NoteFragment -->
     <fragment
         android:id="@+id/noteFragment"
         android:name="com.example.noteapp.ui.fragments.note.NoteFragment"
@@ -39,6 +36,8 @@
             android:id="@+id/action_noteFragment_to_detailNoteFragment"
             app:destination="@id/detailNoteFragment" />
     </fragment>
+
+    <!-- DetailNoteFragment -->
     <fragment
         android:id="@+id/detailNoteFragment"
         android:name="com.example.noteapp.ui.fragments.note.DetailNoteFragment"
@@ -48,6 +47,5 @@
             android:name="noteId"
             app:argType="integer" />
     </fragment>
-
 
 </navigation>

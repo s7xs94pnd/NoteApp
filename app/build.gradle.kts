@@ -49,7 +49,6 @@ dependencies {
     implementation(libs.androidx.navigation.ui)
     // room
     implementation(libs.androidx.room.ktx)
-    implementation(libs.firebase.auth)
     ksp(libs.androidx.room.compiler)
     //dots for a OnBoard
     implementation(libs.dotsindicator)
@@ -57,6 +56,8 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.play.services.auth)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.messaging)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
