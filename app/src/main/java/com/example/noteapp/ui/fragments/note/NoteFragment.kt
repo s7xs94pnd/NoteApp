@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.noteapp.App
@@ -37,6 +38,11 @@ class NoteFragment : Fragment(), OnClickItem {
         init()
         setUpListeners()
         getData()
+        initMenu()
+    }
+
+    private fun initMenu() {
+        binding.navView.setupWithNavController(findNavController())
     }
 
     private fun init() {
@@ -47,7 +53,6 @@ class NoteFragment : Fragment(), OnClickItem {
             } else {
                 layoutManager = LinearLayoutManager(requireContext())
                 binding.toGrid.visibility = View.VISIBLE
-
             }
             adapter = noteAdapter
         }
@@ -63,12 +68,14 @@ class NoteFragment : Fragment(), OnClickItem {
             rvNote.layoutManager = GridLayoutManager(requireContext(), 2)
             sharedPreferences.isGridLayout = true
         }
-
         toLine.setOnClickListener {
             toLine.visibility = View.GONE
             toGrid.visibility = View.VISIBLE
             rvNote.layoutManager = LinearLayoutManager(requireContext())
             sharedPreferences.isGridLayout = false
+        }
+        drawerBtn.setOnClickListener {
+            drawerLayout.openDrawer(navView)
         }
     }
 
