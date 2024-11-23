@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/noteFragment"
+            android:title="home" />
+        <item
+            android:id="@+id/signInFragment"
+            android:title="account" />
+        <item
+            android:id="@+id/onBoardFragment"
+            android:title="onboardin" />
+        <item
+            android:id="@+id/detailNoteFragment"
+            android:title="new Note" />
+    </group>
+</menu>
